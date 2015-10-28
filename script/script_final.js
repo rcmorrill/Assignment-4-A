@@ -22,47 +22,42 @@ function dataLoaded(err,rows){
 
     var year = 1900;
     rows.sort(function(a,b){
-        //Note: this is called a "comparator" function
-        //which makes sure that the array is sorted from highest to lowest
         return b[year] - a[year];
     });
 
-    //Note: this returns "top5" as a subset of the larger array "rows", containing positions 0,1,2,3,4
     var top5 = rows.slice(0,5);
-
-    //Call the draw function
     draw(top5, year);
 
-    //TODO: fill out this function
-    /*d3.selectAll('.btn-group .year').on('click',function(){
-
-        var year = d3.select(this).data('year');
-    console.log("Show top 5 medal count for: " + year);
-        rows.sort(function(a,b){
-        return b[year] - a[year];
-        });
-        var top5 = rows.slice(0,5);
-        draw(top5, year);
- 
-    });*/
 
    d3.selectAll('.btn').on('click',function(){
 
-        var year = $(this).data('ty');
+        var year = d3.select(this).attr('id');
     console.log("Show top 5 medal count for: " + year);
-        rows.sort(function(a,b){
-            //Note: this is called a "comparator" function
-            //which makes sure that the array is sorted from highest to lowest
+
+        if(year =='year-1900'){
+            var year = 1900
+            rows.sort(function(a,b){
             return b[year] - a[year];
-        });
-
-        //Note: this returns positions 0,1,2,3,4 of the "rows" array
-        var top5 = rows.slice(0,5);
-        draw(top5, year);
+            });
+            var top5 = rows.slice(0,5);
+                draw(top5, year);
+        }else if(year == 'year-1960'){
+            var year = 1960
+            rows.sort(function(a,b){
+            return b[year] - a[year];
+            });
+            var top5 = rows.slice(0,5);
+                draw(top5, year);
+        }else { 
+            var year = 2012
+            rows.sort(function(a,b){
+            return b[year] - a[year];
+            });
+            var top5 = rows.slice(0,5);
+                draw(top5, year);
+        }
+       
     });
-
-
-
 
 }
 
